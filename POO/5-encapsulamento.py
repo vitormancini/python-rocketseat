@@ -31,4 +31,5 @@ class Personagem:
         self.__nivel = nivel
     
 personagem = Personagem('Mario', '100', '1')
+print(personagem.__nome) # Erro será lançado
 
