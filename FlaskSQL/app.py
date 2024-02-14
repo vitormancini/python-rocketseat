@@ -51,7 +51,7 @@ def create_user():
     password = data['password']
 
     if username and password:
-        user = User(username = username, password = password)
+        user = User(username = username, password = password, role = 'user')
         db.session.add(user)
         db.session.commit()
 
@@ -88,6 +88,10 @@ def update_user(id):
     user = User.query.get(id)
     data = request.json
     password = data['password'] # Atualiza apenas a senha para não correr problemas com a autenticação do Flask
+
+    # Um usuário apenas pode alterar informações dele própio. Um adm pode alterar informações de qualquer usuário
+    if id != current_user.id and current_user.role == 'user':
+        return jsonify({'message': 'Operação não permitida'}), 403
 
     if user and password:
         user.password = password
