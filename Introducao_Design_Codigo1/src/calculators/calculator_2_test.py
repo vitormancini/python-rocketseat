@@ -9,7 +9,7 @@ class MockRequest:
         self.json = body
 
 # Representação ficticia do driver
-class MockDriverHandler(DriverHandlerInterface):
+class MockDriverHandler:
     def standart_derivation(self, numbers: List[float]) -> float:
         return 3
     
